@@ -58,7 +58,7 @@ const args = process.argv.slice(2);
 // console.log(substract(parseInt(args[0]), parseInt(args[1])));
 
 // const args=process.argv.slice(2)
-const operations = require("./Operations");
+// const operations = require("./Operations");
 
-const adding = operations.add(parseInt(args[0]), parseInt(args[1]));
-console.log(adding);
+// const adding = operations.add(parseInt(args[0]), parseInt(args[1]));
+// console.log(adding);
