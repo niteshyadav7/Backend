@@ -121,9 +121,9 @@
  * CONTACT PAGE // HOW TO ADD CONTACT DYNAMICALLY
  */
 
-
 const express = require("express");
 const port = 8000;
+const db = require("./config/mongoose");
 const path = require("path");
 const parser = require("body-parser");
 
@@ -151,6 +151,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "listContact"), "views");
 app.use(parser.urlencoded({ extended: false }));
+app.use(express.static("assets"));
 
 app.get("/", (req, res) => {
   return res.render("contact", {
@@ -172,4 +173,17 @@ app.listen(port, (err) => {
     console.log(err);
   }
   console.log("server runs on port :", port);
+});
+
+app.get("/delete-contact/", function (req, res) {
+  console.log(req.query);
+  let phone = req.query.phone;
+
+  let contactindex = contactList.findIndex((contact) => contact.phone == phone);
+
+  if (contactindex != -1) {
+    contactList.splice(contactindex, 1);
+  }
+
+  return res.redirect("back");
 });
