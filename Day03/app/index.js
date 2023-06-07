@@ -8,13 +8,13 @@ const requestHandler = (request, response) => {
   let filePath;
   switch (request.url) {
     case "/":
-      filePath=("./index.html");
+      filePath = "./index.html";
       break;
     case "/contact":
-      filePath=("./contact.html");
+      filePath = "./contact.html";
       break;
     default:
-      filePath=("./404.html");
+      filePath = "./404.html";
   }
   fs.readFile(filePath, (err, data) => {
     if (err) {
