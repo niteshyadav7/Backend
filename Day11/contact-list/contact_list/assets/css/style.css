@@ -1,0 +1,14 @@
+body {
+  text-align: center;
+}
+ul > li {
+  list-style: none;
+}
+.header {
+  margin-left: 10px;
+}
+
+form {
+  margin: 20px;
+  padding: 32px;
+}
