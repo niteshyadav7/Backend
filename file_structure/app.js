@@ -8,6 +8,10 @@ const db = require("./config/mongoose");
 
 const app = express();
 
+
+
+app.use(express.static("assets"));
+
 app.use(expressLayout);
 
 app.use("/", require("./routes/index"));
