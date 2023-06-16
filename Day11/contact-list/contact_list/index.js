@@ -3,6 +3,14 @@ const port = 8000;
 const hostName = "http://localhost";
 const path = require("path");
 
+// HOW TO COONECT TO MONGOOSE
+
+const db = require("./config/mongoose");
+
+const Contact = require("./models/contact");
+
+// How to make schema
+
 // DUMMY DATA FOR CONTACT LIST
 var contact_list = [
   {
@@ -41,43 +49,65 @@ app.use(express.urlencoded());
 app.use(express.static("assets"));
 
 // HOW TO RENDER EXTERANL FILE
-app.get("/", (req, res) => {
-  return res.render("contact.ejs", {
+// app.get("/", (req, res) => {
+//   return res.render("contact.ejs", {
+//     title: "My Contact Page",
+//     contactList: contact_list,
+//   });
+// });
+app.get("/", async (req, res) => {
+  const contact = await Contact.find({});
+  return res.render("contact", {
     title: "My Contact Page",
-    contactList: contact_list,
+    contactList: contact,
   });
 });
 
 // HOW TO POST
-app.post("/addContact", (req, res) => {
-  contact_list.push({
+// app.post("/addContact", (req, res) => {
+//   // contact_list.push({
+//   //   name: req.body.name,
+//   //   phone: req.body.phone,
+//   // });
+//   // return res.redirect("/");
+//   Contact.create(
+//     {
+//       name: req.body.name,
+//       phone: req.body.phone,
+//     },
+//     function (err, newContact) {
+//       if (err) {
+//         console.log("Error occurs during the creating contact");
+//         return;
+//       }
+//       console.log("****", newContact);
+//       return res.redirect("back");
+//     }
+//   );
+// });
+
+app.post("/create-contact", async function (req, res) {
+  await Contact.create({
     name: req.body.name,
     phone: req.body.phone,
   });
-  return res.redirect("/");
+  return res.redirect("back");
 });
-
-
 app.listen(port, (err) => {
   if (err) {
     console.log("Error", err);
   }
   console.log(`express running on ${hostName}:${port}`);
 });
-app.get("/deleteContact", (req, res) => {
-  let phone = req.query.phone;
-  let contactIndex = contact_list.findIndex(
-    (contact) => (contact.phone = phone)
-  );
-  if (contactIndex != -1) {
-    contact_list.splice(contactIndex, 1);
-  }
+
+
+app.get("/deleteContact", async (req, res) => {
+  let id = req.query.id;
+  await Contact.findByIdAndDelete(id)
   return res.redirect("back");
 });
 
-
-
-// HOW TO WRITE ERROR PAGE
-app.use((req, res, nxt) => {
-  res.status(404).render("404.ejs");
-});
+// // HOW TO WRITE ERROR PAGE
+// app.use((req, res, nxt) => {
+//   res.status(404).render("404.ejs");
+// });

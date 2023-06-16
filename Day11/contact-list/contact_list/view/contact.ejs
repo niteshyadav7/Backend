@@ -15,14 +15,14 @@
           <div><%=i.name%></div>
           <div><%=i.phone%></div>
           <div>
-            <a href="/deleteContact/?phone=<%=i.phone%>">delete</a>
+            <a href="/deleteContact/?id=<%=i._id%>">delete</a>
           </div>
          
         </li>
         <%}%>
       </ul>
     </div>
-    <form class="form" action="/addContact" method="post">
+    <form class="form" action="/create-contact" method="post">
       <input
         type="text"
         name="name"

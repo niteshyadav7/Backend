@@ -1,3 +1,5 @@
-module.exports.home=function(req,res){
-    return res.end("<h1>Hello Nitesh Yadav</h1>")
-}
+module.exports.home = function (req, res) {
+  return res.render("home.ejs", {
+    title: "My Home Page",
+  });
+};
