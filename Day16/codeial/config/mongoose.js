@@ -1,11 +1,15 @@
-// getting-started.js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-main().catch((err) => console.log(err));
+mongoose.connect('mongodb://localhost/codeial_development');
 
-async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/test");
+const db = mongoose.connection;
 
-  console.log("mongodb://127.0.0.1:27017/test");
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
+db.on('error', console.error.bind(console, "Error connecting to MongoDB"));
+
+
+db.once('open', function(){
+    console.log('Connected to Database :: MongoDB');
+});
+
+
+module.exports = db;
