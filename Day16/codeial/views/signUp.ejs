@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+  </head>
+  <body>
+    <h1>SignUp Page</h1>
+    <form action="/users/create" method="post">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        required
+        placeholder="Enter Your Name"
+      />
+      <br />
+      <input
+        type="email"
+        name="email"
+        id="email "
+        required
+        placeholder="Enter Your Email"
+      />
+      <br />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        placeholder="Enter your Password"
+      />
+      <br />
+      <input
+        type="password"
+        name="confirm_password"
+        required
+        placeholder="Confirm Password"
+      />
+      <br />
+      <input type="button" value="Submit" />
+    </form>
+  </body>
+</html>
